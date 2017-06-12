@@ -6,11 +6,12 @@ from bs4 import BeautifulSoup
 import schedule
 import time
 
+
 username='simonkrol'
+send_time="22:00"
+
+
 url = 'https://github.com/'+username
-
-
-
 def get_cont():
 	response = requests.get(url)
 	soup = BeautifulSoup(response.text, 'lxml')
@@ -33,7 +34,8 @@ def send_sms(cont):
 def run():
 	environ.set_env()
 	send_sms(get_cont())
-schedule.every().day.at("19:11").do(run)
+
+schedule.every().day.at(send_time).do(run)
 while True:
 	schedule.run_pending()
 	time.sleep(60)
