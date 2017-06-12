@@ -3,9 +3,10 @@
 A python script that sends you an SMS message with the number of contributions you've made that day
 
 ### Technology
-- Python
+- Python 3
 - Requests
 - Twilio
+- BeautifulSoup4
 Includes a scheduler to allow you to set a specific time to run each day
 
 ### Options
@@ -13,7 +14,7 @@ Includes a scheduler to allow you to set a specific time to run each day
 - Select the time to send sms or send immediately
 >Version 1.1
 
-### Setup
+### Setup (Windows)
 - Download or clone the repository
 - Make sure `pip` and Python 3 are installed
 - Install the required modules
@@ -26,10 +27,17 @@ $ pip install schedule
 - Create a Twilio account and generate a number to send from
 - Use your Twilio account to set each of the environment variables in a method called set_env within the environ.py file
 ```
-os.environ['TWILIO_ACCOUNT_SID']=...
+def set_env():
+	os.environ['TWILIO_ACCOUNT_SID']=...
+	os.environ['TWILIO_AUTH_TOKEN']=...
+	os.environ['TWILIO_NUMBER']=...#Check twilio for formatting requirements
+	os.environ['MY_NUMBER']=...
 ```
-- Change the scheduled time and username
-- Run
+- Set the scheduled time and your github username
+
+### Usage
+- Execute through command line
 ```
 $ python contributions.pyw
 ```
+- or Right click on file and run using Python
