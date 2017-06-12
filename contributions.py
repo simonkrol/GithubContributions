@@ -3,7 +3,8 @@ from twilio.rest import TwilioRestClient
 import environ#File used to set environment variables
 import os
 from bs4 import BeautifulSoup
-
+import schedule
+import time
 
 username='simonkrol'
 url = 'https://github.com/'+username
@@ -29,6 +30,10 @@ def send_sms(cont):
 	client.messages.create(from_=os.environ['TWILIO_NUMBER'],
 						   to=os.environ['MY_NUMBER'],
 						   body=messageBody)
-
-environ.set_env()
-send_sms(get_cont())
+def run():
+	environ.set_env()
+	send_sms(get_cont())
+schedule.every().day.at("19:11").do(run)
+while True:
+	schedule.run_pending()
+	time.sleep(60)
