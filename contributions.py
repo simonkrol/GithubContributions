@@ -25,6 +25,6 @@ if(contributions[-1]=='0'):
 else:
 	messageBody="So far today, you have made "+contributions[-1]+" contributions on Github"
 client.messages.create(from_=os.environ['TWILIO_NUMBER'],
-					   to="(613) 402-1404",
+					   to=os.environ['MY_NUMBER'],
 					   body=messageBody)
 
