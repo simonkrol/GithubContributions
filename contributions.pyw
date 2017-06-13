@@ -20,7 +20,13 @@ def get_cont():
 	# for link in soup.find_all('rect'): #Gets a list of contribution numbers for each day 
 	#     contributions.append(link.get('data-count')) 
 	#print(contributions[-1])
-	return(soup.find_all('rect')[-1]).get('data-count')
+	curr_day=time.strftime("%Y-%m-%d")
+	curr_div=soup.find_all('rect')[-1]
+	if(curr_div.get('data-date')!=curr_day):
+		curr_div=soup.find_all('rect')[-2]
+	return(curr_div.get('data-count'))
+
+
 def send_sms(cont):
 	client = TwilioRestClient(os.environ['TWILIO_ACCOUNT_SID'], os.environ['TWILIO_AUTH_TOKEN'])
 
@@ -35,6 +41,7 @@ def run():
 	environ.set_env()
 	send_sms(get_cont())
 
+run()
 schedule.every().day.at(send_time).do(run)
 while True:
 	schedule.run_pending()
