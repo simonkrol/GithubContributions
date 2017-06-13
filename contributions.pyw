@@ -15,16 +15,11 @@ url = 'https://github.com/'+username
 def get_cont():
 	response = requests.get(url)
 	soup = BeautifulSoup(response.text, 'lxml')
-
-	# contributions=[]
-	# for link in soup.find_all('rect'): #Gets a list of contribution numbers for each day 
-	#     contributions.append(link.get('data-count')) 
-	#print(contributions[-1])
+	soup=soup.find_all('rect')
 	curr_day=time.strftime("%Y-%m-%d")
-	curr_div=soup.find_all('rect')[-1]
-	if(curr_div.get('data-date')!=curr_day):
-		curr_div=soup.find_all('rect')[-2]
-	return(curr_div.get('data-count'))
+	for link in range(len(soup)-1, -1,-1):
+		if(soup[link].get('data-date')==curr_day):
+			return soup[link].get('data-count')
 
 
 def send_sms(cont):
@@ -33,7 +28,7 @@ def send_sms(cont):
 	if(cont=='0'):
 		messageBody=username+" has yet to make a contribution on Github today."
 	else:
-		messageBody="So far today,"+username+" has made "+cont+" contributions on Github"
+		messageBody="So far today, "+username+" has made "+cont+" contributions on Github"
 	client.messages.create(from_=os.environ['TWILIO_NUMBER'],
 						   to=os.environ['MY_NUMBER'],
 						   body=messageBody)
