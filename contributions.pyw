@@ -35,8 +35,7 @@ def send_sms(cont):
 def run():
 	environ.set_env()
 	send_sms(get_cont())
-
-run()
+#run()#Uncomment to test sms functionality
 schedule.every().day.at(send_time).do(run)
 while True:
 	schedule.run_pending()
