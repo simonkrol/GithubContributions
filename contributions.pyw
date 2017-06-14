@@ -11,9 +11,9 @@ username='simonkrol'
 send_time="22:00"
 
 
-url = 'https://github.com/'+username
-def get_cont():
-	response = requests.get(url)
+url = 'https://github.com/'
+def get_cont(user):
+	response = requests.get((url+user))
 	soup = BeautifulSoup(response.text, 'lxml')
 	soup=soup.find_all('rect')
 	curr_day=time.strftime("%Y-%m-%d")
@@ -21,21 +21,21 @@ def get_cont():
 		if(soup[link].get('data-date')==curr_day):
 			return soup[link].get('data-count')
 
-
+def get_message(cont):
+	if(cont=='0'):
+		return(username+" has yet to make a contribution on Github today.")
+	else:
+		return("So far today, "+username+" has made "+cont+" contributions on Github")
 def send_sms(cont):
 	client = TwilioRestClient(os.environ['TWILIO_ACCOUNT_SID'], os.environ['TWILIO_AUTH_TOKEN'])
-
-	if(cont=='0'):
-		messageBody=username+" has yet to make a contribution on Github today."
-	else:
-		messageBody="So far today, "+username+" has made "+cont+" contributions on Github"
 	client.messages.create(from_=os.environ['TWILIO_NUMBER'],
 						   to=os.environ['MY_NUMBER'],
-						   body=messageBody)
+						   body=get_message(cont))
 def run():
 	environ.set_env()
-	send_sms(get_cont())
+	send_sms(get_cont(username))
 #run()#Uncomment to test sms functionality
+
 schedule.every().day.at(send_time).do(run)
 while True:
 	schedule.run_pending()
