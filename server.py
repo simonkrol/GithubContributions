@@ -9,8 +9,15 @@ app = Flask(__name__)
 def sms():
     number = request.form['From']
     message_body = request.form['Body']
-    new_message=helper.get_response(message_body)
+    body=message_body.split()
+    print(body)
+    new_message=helper.get_response(body[0])
+    streak_message=""
+    if(len(body)>1):
+    	if(body[1].lower()=="streak"):
+    		streak_message=helper.get_streak(body[0])
     resp = twiml.Response()
+    new_message=new_message+streak_message
     resp.message(new_message)
     return str(resp)
 if __name__ == '__main__':
