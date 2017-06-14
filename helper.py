@@ -8,6 +8,8 @@ def get_response(user):
 	response = requests.get(("https://github.com/"+user))
 	soup = BeautifulSoup(response.text, 'lxml')
 	soup=soup.find_all('rect')
+	if(soup==[]):
+		return (user+" is not a GitHub user.")
 	curr_day=time.strftime("%Y-%m-%d")
 	for link in range(len(soup)-1, -1,-1):
 		if(soup[link].get('data-date')==curr_day):
