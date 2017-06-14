@@ -1,6 +1,7 @@
 # Github Contribution Reminder
 
 A python script that sends you an SMS message with the number of contributions you've made that day
+Also includes a heroku server that when sent a sms containing a github username, responds with the number of contributions.
 
 ### Technology
 - Python 3
@@ -25,7 +26,7 @@ $ pip install schedule
 ```
 - Create an environ.py file in the same directiory as contributions.pyw
 - Create a Twilio account and generate a number to send from
-- Use your Twilio account to set each of the environment variables in a method called set_env within the environ.py file
+- Use your Twilio account to set each of the environment variables in a method called set_env within the config.py file
 ```
 def set_env():
 	os.environ['TWILIO_ACCOUNT_SID']=...

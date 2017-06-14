@@ -1,6 +1,6 @@
 
 import helper
-import environ#File used to set environment variables
+import config#File used to set environment variables
 import os
 import schedule
 import time
