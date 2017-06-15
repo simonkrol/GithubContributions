@@ -1,4 +1,6 @@
 from bs4 import BeautifulSoup
+import os
+from twilio.rest import TwilioRestClient
 import requests
 import time
 
