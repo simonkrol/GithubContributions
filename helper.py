@@ -17,7 +17,15 @@ def get_contributions(user):
 		if(soup[link].get('data-date')==curr_day):
 			return get_message(soup[link].get('data-count'), user)
 
-
+def get_total(user):
+	response=requests.get(("https://github.com/"+user))
+	soup=BeautifulSoup(response.text, 'lxml')
+	soup=soup.find_all('h2', { "class" : "f4 text-normal mb-2"})
+	for h2 in soup:
+			try:
+				return (h2.get_text().split(' '))[6]
+			except ValueError:
+				pass
 def get_message(cont, user):
 	if(cont=='0'):
 		return(user+" has yet to make a contribution on Github today. ")
