@@ -1,7 +1,7 @@
 # Github Contribution Reminder
 
 A python script that sends you an SMS message with the number of contributions you've made that day
-Also includes a heroku server that when sent a sms containing a github username, responds with the number of contributions.
+Makes use of a server (hosted on Heroku) that when sent a sms, can respond with a Github user's daily and yearly contribution number, as well as their current contribution streak.
 
 ### Technology
 - Python 3
@@ -9,11 +9,13 @@ Also includes a heroku server that when sent a sms containing a github username,
 - Twilio
 - BeautifulSoup4
 Includes a scheduler to allow you to set a specific time to run each day
+Uses a heroku server to respond to text requests
 
 ### Options
 - Choose which user to inspect
 - Select the time to send sms or send immediately
->Version 1.1
+- Send sms to retrieve information about streaks, daily contributions and yearly contributions
+>Version 1.2
 
 ### Setup (Windows)
 - Download or clone the repository

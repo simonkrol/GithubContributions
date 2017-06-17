@@ -14,8 +14,9 @@ def sms():
 
     message= {
     	'about': "helper.get_help()",
-    	'contributions': "helper.get_contributions(body[0])",
-        'streak' : "helper.get_streak(body[0])"
+    	'today': "helper.get_contributions(body[0])",
+        'streak': "helper.get_streak(body[0])",
+        'total': "helper.get_total(body[0])"
     }.get(body[-2].lower(), "helper.get_error(body[-2])")
     message=eval(message)
     if(body[0]=="help"):

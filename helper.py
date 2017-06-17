@@ -22,10 +22,9 @@ def get_total(user):
 	soup=BeautifulSoup(response.text, 'lxml')
 	soup=soup.find_all('h2', { "class" : "f4 text-normal mb-2"})
 	for h2 in soup:
-			try:
-				return (h2.get_text().split(' '))[6]
-			except ValueError:
-				pass
+		total_cont=(h2.get_text().split(' '))[6]
+		response=user +" has made "+total_cont + " contributions in the past year."
+		return response
 def get_message(cont, user):
 	if(cont=='0'):
 		return(user+" has yet to make a contribution on Github today. ")
@@ -65,7 +64,9 @@ def get_streak(user):
 def get_help():
 	response="Welcome to the github contributions viewer, start your text with the username of the github user you would like to inspect."
 	response+=" The second word in your text can be any of the following:"
-	response+=" 'contributions'(returns the number of contributions the user has made today), 'streak'(indicates the current contribution streak of the user)."
+	response+=" 'today'(returns the number of contributions the user has made today),"
+	response+=" 'streak'(indicates the current contribution streak of the user)."
+	response+=" 'total'(indicates the user's total number of contribution in the past year)."
 	response+="\n\n Example: simonkrol streak"
 	return response
 
