@@ -17,7 +17,7 @@ Uses a heroku server to respond to text requests
 - Send sms to retrieve information about streaks, daily contributions and yearly contributions
 >Version 1.2
 
-### Setup (Windows)
+### Schedule Sender Setup(Windows)
 - Download or clone the repository
 - Make sure `pip` and Python 3 are installed
 - Install the required modules
@@ -44,3 +44,16 @@ def set_env():
 $ python contributions.pyw
 ```
 - or Right click on file and run using Python
+
+
+### Heroku Server Setup
+- Download and clone repository
+- Create heroku project
+```
+heroku create
+```
+- Push project to heroku
+```
+git push heroku master
+```
+- Change the webhook link on twilio to your heroku project link /sms
