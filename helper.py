@@ -52,6 +52,7 @@ def get_streak(user):
 	for link in range(len(soup)-1, -1,-1):
 		if(soup[link].get('data-date')==curr_day):
 			if(soup[link].get('data-count'!="0")):
+				print("Made a contribution today")
 				streak+=1
 			for date in range(link-1, -1, -1):
 				if(soup[date].get('data-count')!="0"):
@@ -66,6 +67,7 @@ def get_streak(user):
 					else:
 						message+=" days."
 					return message
+
 
 
 def get_help(): #Returns the help text
