@@ -58,9 +58,8 @@ heroku create
 ```
 git push heroku master
 ```
-- Set the environment variables(shown in section #1) manually add through Heroku web interface
-- The MY_NUMBER environment variable is no longer required as the server will respond to whoever sends the message (assuming the number has been verified on the twilio account)
-- For improved Heroku time data(For EST), I recommend adding the additional environment variable:
+- Since the server interfaces directly with Twilio, the environment variables are not necessary here.
+- However, for improved Heroku time data(For EST), I recommend adding the following environment variable:
 ```
 TZ:America/Atikokan
 ```
